@@ -22,23 +22,14 @@ export function proxy(request: NextRequest) {
   }
 
   // 2. Protect all other routes
-  if (!session) {
-    return NextResponse.redirect(new URL("/login", request.url));
-  }
+  // if (!session) {
+  //   return NextResponse.redirect(new URL("/login", request.url));
+  // }
 
   return NextResponse.next();
 }
 
 // Config to specify matching routes
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - api (API routes)
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    "/((?!_next/static|_next/image|favicon.ico).*)",
-  ],
+  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
 };
